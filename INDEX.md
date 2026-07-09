@@ -4,7 +4,7 @@
 > primary (in-repo readable); HTML / PDF downloadable per entry.
 
 **Library root:** `/` of this repo
-**INDEX last regenerated:** 2026-07-09
+**INDEX last regenerated:** 2026-07-10
 
 ---
 
@@ -25,7 +25,7 @@
 |---|---------|--------|-----:|
 | 1 | [Loop Engineering — from the Ground Up](./01-Mentee-Workbooks/loop-engineering/) | Self-improving agent loops, convergence criteria, postmortem patterns | ~ MD README + HTML + PDF |
 | 2 | [Context Engineering — from the Ground Up](./01-Mentee-Workbooks/context-engineering/) | Context window discipline, retrieval primitives, M3 economy | README + HTML + PDF |
-| 3 | [Obsidian Wikilinks and the Karpathy Wiki — from the Ground Up](./01-Mentee-Workbooks/obsidian-wikilinks/) | Hand-curated knowledge graphs, PPR-over-graph retrieval | README + HTML + PDF |
+| 3 | [Obsidian Wikilinks and the Karpathy Wiki — from the Ground Up](./01-Mentee-Workbooks/obsidian-wikilinks/) | Hand-curated knowledge graphs, PPR-over-graph retrieval, **hooks pattern** | README + HTML + PDF (public edition) |
 | 4 | [Quant Research and Trading with a Tight-Context LLM — from the Ground Up](./01-Mentee-Workbooks/quant-engineering/) | Quant research + tight-context LLM, eval gates G1–G31 | README + HTML + PDF |
 | 5 | [AI Architecture — from the Ground Up (Guide)](./01-Mentee-Workbooks/ai-architecture-guide/) | Multi-agent AI architecture, boundaries, orchestration | README + HTML + PDF |
 | 6 | [AI in Hedge Funds — Workbook](./01-Mentee-Workbooks/ai-in-hedge-funds/) | Institutional operating standard, audit-trail expectations | README + HTML + PDF |
