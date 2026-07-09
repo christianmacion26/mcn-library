@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Deribit ATM IV → Forward Realized Volatility — Complete Research Dossier</title>
+<style>
+  @page { size: Letter; margin: 0.8in 0.78in; }
+  body { font-family: Georgia, "Times New Roman", serif; color: #1a1a1a; font-size: 10.2pt; line-height: 1.46; }
+  h1 { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 18pt; color: #0b3d66; margin: 0 0 2px 0; line-height: 1.16; }
+  .sub { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 9.2pt; color: #555; margin: 0 0 12px 0; }
+  h2 { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 12.5pt; color: #0b3d66; border-bottom: 2px solid #d3a625; padding-bottom: 3px; margin: 20px 0 9px 0; }
+  h3 { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 10.6pt; color: #14507f; margin: 13px 0 5px 0; }
+  p { margin: 0 0 8px 0; }
+  .lead { background: #f4f7fa; border-left: 4px solid #0b3d66; padding: 10px 13px; margin: 0 0 8px 0; }
+  .keep { background: #0d3320; color: #eafaf0; border-left: 5px solid #38b06a; padding: 11px 15px; margin: 8px 0; }
+  .keep b, .keep .hl { color: #6ee59a; }
+  table { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: 8.9pt; }
+  th { background: #0b3d66; color: #fff; text-align: left; padding: 4px 7px; font-family: "Helvetica Neue", Arial, sans-serif; font-size: 8.3pt; }
+  td { border: 1px solid #ccd5dd; padding: 4px 7px; vertical-align: top; }
+  tr:nth-child(even) td { background: #f6f9fb; }
+  .gd { color: #1d7a3e; font-weight: bold; } .bd { color: #c0392b; font-weight: bold; }
+  ul { margin: 5px 0 8px 0; padding-left: 19px; }
+  li { margin-bottom: 4px; }
+  ol.refs { margin: 5px 0; padding-left: 19px; }
+  ol.refs li { margin-bottom: 6px; }
+  .auth { font-weight: bold; }
+  .venue { font-style: italic; color: #333; }
+  .canon { color: #9a6a00; font-weight: bold; font-size: 8.1pt; font-family: "Helvetica Neue", Arial, sans-serif; }
+  a { color: #0b5394; text-decoration: none; word-break: break-all; font-size: 8.1pt; }
+  .notes { background: #fbf8ef; border: 1px solid #e3d4a0; padding: 10px 13px; margin-top: 12px; font-size: 9.1pt; }
+  .warn { background: #fdf1f0; border-left: 4px solid #c0392b; padding: 9px 12px; margin: 8px 0; font-size: 9.4pt; }
+  .def { background:#f3f6f3; border:1px solid #cfdccf; padding:8px 11px; margin:7px 0; font-size:9.1pt; }
+  .verdict { display:inline-block; font-family:"Helvetica Neue",Arial,sans-serif; font-size:8.2pt; font-weight:bold; padding:2px 8px; border-radius:3px; color:#fff; }
+  .v-iter { background:#b8860b; } .v-hand { background:#1d7a3e; } .v-kill { background:#c0392b; }
+  .footer { margin-top: 14px; font-family: "Helvetica Neue", Arial, sans-serif; font-size: 7.4pt; color: #888; border-top: 1px solid #ccc; padding-top: 5px; }
+  .tag { display:inline-block; font-family:"Helvetica Neue",Arial,sans-serif; font-size:7.1pt; background:#0b3d66; color:#fff; padding:1px 6px; border-radius:3px; vertical-align:middle; }
+  .pagebreak { page-break-before: always; }
+  code { font-family: "SF Mono", Menlo, monospace; font-size: 8.5pt; background:#eef2f5; padding:0 3px; border-radius:2px; }
+  .formula { font-family:"SF Mono",Menlo,monospace; font-size:9pt; background:#f4f6f8; border-left:3px solid #9bb4c8; padding:6px 10px; margin:6px 0; display:block; white-space:pre-wrap; }
+  figure { margin: 8px 0; text-align:center; page-break-inside: avoid; }
+  figure img { max-width: 88%; border: 1px solid #d0d7dd; }
+  figcaption { font-family:"Helvetica Neue",Arial,sans-serif; font-size:7.9pt; color:#666; margin-top:3px; }
+  .twocol { display:flex; gap:10px; }
+  .twocol figure { flex:1; margin:6px 0; }
+  .twocol img { max-width:100%; }
+  .toc { font-family:"Helvetica Neue",Arial,sans-serif; font-size:9pt; columns:2; column-gap:24px; }
+  .toc div { margin-bottom:2px; }
+  /* ---- professional title page ---- */
+  .titlepage { page-break-after: always; padding-top: 0.5in; }
+  .tp-kicker { font-family:"Helvetica Neue",Arial,sans-serif; font-size:8.5pt; letter-spacing:3px; color:#9a6a00; text-align:center; text-transform:uppercase; margin:0 0 30px; }
+  .tp-title { font-family:"Helvetica Neue",Arial,sans-serif; font-size:24pt; line-height:1.2; color:#0b3d66; text-align:center; font-weight:700; margin:0 auto 6px; max-width:6.6in; }
+  .tp-subtitle { font-family:"Helvetica Neue",Arial,sans-serif; font-size:11pt; color:#555; text-align:center; font-weight:400; margin:0 auto 0; max-width:5.6in; line-height:1.35; }
+  .tp-rule { width:60px; height:3px; background:#d3a625; border:0; margin:22px auto 24px; }
+  .tp-author { font-family:"Helvetica Neue",Arial,sans-serif; font-size:13.5pt; color:#1a1a1a; text-align:center; font-weight:600; margin:0 0 4px; }
+  .tp-affil { font-family:"Helvetica Neue",Arial,sans-serif; font-size:10pt; color:#555; text-align:center; margin:0 0 3px; }
+  .tp-date { font-family:"Helvetica Neue",Arial,sans-serif; font-size:9.5pt; color:#777; text-align:center; margin:0 0 30px; }
+  .abstract { max-width:5.9in; margin:0 auto; }
+  .abstract .ab-h { font-family:"Helvetica Neue",Arial,sans-serif; text-align:center; font-size:9.5pt; letter-spacing:2px; text-transform:uppercase; color:#0b3d66; margin:0 0 9px; font-weight:700; }
+  .abstract p { text-align:justify; font-size:9.8pt; line-height:1.5; margin:0 0 8px; }
+  .keywords { max-width:5.9in; margin:12px auto 0; font-size:9pt; color:#444; text-align:justify; }
+  .tp-status { max-width:5.9in; margin:26px auto 0; font-family:"Helvetica Neue",Arial,sans-serif; font-size:8pt; color:#888; text-align:center; border-top:1px solid #dcdcdc; padding-top:9px; line-height:1.5; }
+</style>
+</head>
+<body>
+
+<div class="titlepage">
+  <p class="tp-kicker">19V Capital &middot; Research Dossier</p>
+
+  <h1 class="tp-title">Deribit ATM Implied Volatility as a Forward Realized-Volatility Forecast</h1>
+  <p class="tp-subtitle">Options-implied volatility as a venue-agnostic risk &amp; sizing conditioner for executable Bitcoin strategies</p>
+
+  <hr class="tp-rule">
+
+  <p class="tp-author">Christian Macion</p>
+  <p class="tp-affil">Submitted to 19V Capital &mdash; BTC / Deribit Options Research</p>
+  <p class="tp-date">June 11, 2026</p>
+
+  <div class="abstract">
+    <p class="ab-h">Abstract</p>
+    <p>We document the one positive, reproducible result from 19V Capital&rsquo;s Bitcoin / Deribit-options research program: the month-start 30-day at-the-money implied volatility (ATM IV) of Deribit Bitcoin options is a strong, era-stable forecast of Bitcoin&rsquo;s realized volatility over the subsequent 21 trading days. In a pre-registered, seed-reproducible study, ATM IV attains a Spearman rank information coefficient of <b>+0.66</b> (Newey-West <i>t</i> = <b>+6.69</b>, <i>n</i> = 60), clears the strictest multiple-testing bar across a 60-signal family, holds its sign across every observable market era, and statistically subsumes trailing realized volatility &mdash; the obvious competing predictor adds essentially nothing once implied vol is included.</p>
+    <p>A directional hypothesis &mdash; that the surface predicts the <i>sign</i> of forward returns &mdash; was pre-registered and rejected. A companion application backtest shows that sizing a monthly volatility-targeted Bitcoin exposure on ATM IV tracks the volatility target materially tighter, trades cheaper, and roughly halves drawdown relative to an unsized position. The signal&rsquo;s value is therefore as a <b>volatility / risk conditioner</b> &mdash; position sizing, regime-gating, vol-targeting &mdash; rather than as a directional alpha source. All results are research-grade; the binding out-of-sample validation pass remains outstanding.</p>
+    <p class="keywords"><b>Keywords:</b> implied volatility; realized-volatility forecasting; Bitcoin; Deribit options; volatility targeting; information coefficient; position sizing; options-implied information.</p>
+  </div>
+
+  <p class="tp-status">Status: research fidelity (not yet binding-validated) &middot; Pre-registered and reproducible (seed 20260611)<br>Two underlying studies: a signal study (verdict ITERATE) and a vol-conditioner application backtest (verdict HANDOFF)</p>
+</div>
+
+<div class="keep">
+<span class="hl" style="font-family:'Helvetica Neue',Arial,sans-serif; font-size:11pt; font-weight:bold;">HEADLINE RESULT</span><br>
+The month-start <b>30-day at-the-money implied volatility</b> of Deribit Bitcoin options forecasts <b>Bitcoin&rsquo;s realized volatility over the next 21 trading days</b>. Rank correlation (Spearman IC) <b>+0.66</b>; Newey-West t-statistic <b>+6.69</b> (n=60); clears the strictest multiple-testing bar across a 60-signal family; <b>stable across every observable market era</b>; and it <b>statistically absorbs trailing realized volatility</b> (the obvious competing predictor adds essentially nothing once implied vol is included). Directional use &mdash; predicting the <i>sign</i> of returns &mdash; was tested and <b>failed</b>. The signal&rsquo;s value is therefore as a <b>volatility/risk conditioner</b> (sizing, regime-gating, vol-targeting), not as a directional alpha source.
+</div>
+
+<h2>Contents</h2>
+<div class="toc">
+<div>1. Executive summary</div>
+<div>2. Context &amp; the question</div>
+<div>3. Definitions &amp; glossary</div>
+<div>4. Signal specification (exact formulas)</div>
+<div>5. Data &amp; environment</div>
+<div>6. Methodology &amp; statistical tests</div>
+<div>7. The validation-gate framework</div>
+<div>8. Study 1 &mdash; signal study (results)</div>
+<div>9. Study 2 &mdash; vol-conditioner backtest</div>
+<div>10. Why this is worth preserving</div>
+<div>11. How to use it &mdash; entry &amp; exit</div>
+<div>12. What is interesting / non-obvious</div>
+<div>13. Supporting academic literature</div>
+<div>14. Forward-research playbook</div>
+<div>15. Limitations &amp; validation status</div>
+<div>16. Conclusion</div>
+</div>
+
+<h2>1. Executive summary</h2>
+<p>This dossier documents the one genuinely positive, reproducible result from 19V Capital&rsquo;s Bitcoin / Deribit-options research effort. Two studies were run, both at research fidelity, both pre-registered (hypotheses and decision rules fixed before results were seen), both seeded for exact reproduction.</p>
+<ul>
+  <li><b>Study 1 (signal study).</b> Establishes the core fact: Deribit month-start 30-day ATM implied volatility (IV) is a strong, era-stable forecast of forward realized volatility (RV), and it subsumes trailing RV. The directional hypothesis (does the surface predict return <i>direction</i>?) was tested and killed, as expected. Verdict: <span class="verdict v-iter">ITERATE</span> &mdash; advance the IV&rarr;RV finding as an input; do not treat it as a standalone strategy.</li>
+  <li><b>Study 2 (application backtest).</b> Takes the forecast and tests whether it <i>sizes a position</i> better than the conventional trailing-RV estimate, by running a monthly volatility-targeted long-Bitcoin exposure. IV-based sizing tracks the volatility target materially tighter, runs cheaper, and roughly halves drawdown versus an unsized position. Verdict: <span class="verdict v-hand">HANDOFF</span> &mdash; ready for the full binding validation pass.</li>
+</ul>
+<p><b>What it is, in one line:</b> a high-quality, literature-consistent <i>volatility forecaster</i> for Bitcoin &mdash; useful as a risk/sizing conditioner for executable strategies, not as a buy/sell signal. <b>What remains:</b> the binding out-of-sample validation pass (Section 14) has not yet been run; all numbers here are research-grade.</p>
+
+<h2>2. Context &amp; the question</h2>
+<p>Bitcoin is traded by 19V on listed CME futures; an associated options market (Deribit) prices implied volatility across strikes and maturities. A standing question in the research program was whether information in the Deribit options <i>surface</i> &mdash; implied vol level, term-structure slope, skew, put/call open interest &mdash; carries forward-looking signal about Bitcoin that could improve an executable futures strategy.</p>
+<p>Two distinct claims were separated up front, because they have very different prior probabilities and very different value:</p>
+<ul>
+  <li><b>H1 &mdash; volatility forecasting (primary).</b> Does month-start surface information predict <i>how much</i> Bitcoin will move (realized volatility) over the following weeks? Prior: plausible &mdash; implied vol is, by construction, the market&rsquo;s forward vol expectation, and this relationship is one of the most replicated facts in empirical finance.</li>
+  <li><b>H2 &mdash; directional forecasting (secondary).</b> Does it predict <i>which way</i> Bitcoin will move (signed returns)? Prior: low &mdash; options flow is largely direction-agnostic, and any implied-minus-realized vol gap is known to be a risk premium, not a directional forecast.</li>
+</ul>
+<p>The execution context matters and shapes how the result can be used. 19V&rsquo;s executable account enforces intraday-flat discipline (no overnight or multi-day holds) and tight real-time loss limits. A monthly-held position is therefore <i>not directly executable</i> on that account; a volatility/sizing conditioner that improves an intraday strategy <i>is</i>. This is why the deliverable is framed as a conditioner, and why a venue-agnostic, reusable forecast is strategically valuable: it survives a change of execution venue.</p>
+
+<h2 class="pagebreak">3. Definitions &amp; glossary</h2>
+<p>Every term and statistic used in this document, defined so it stands alone.</p>
+<table>
+  <tr><th>Term</th><th>Definition</th></tr>
+  <tr><td><b>Implied volatility (IV)</b></td><td>The volatility figure implied by an option&rsquo;s market price &mdash; the market&rsquo;s forward-looking estimate of how much the underlying will move, annualized. &ldquo;ATM&rdquo; = at-the-money (strike near spot). &ldquo;30-day&rdquo; = constant-maturity 30 calendar days.</td></tr>
+  <tr><td><b>Realized volatility (RV)</b></td><td>The volatility actually observed after the fact, computed from price movements. &ldquo;Forward 21d RV&rdquo; = the RV realized over the 21 trading days <i>following</i> the observation.</td></tr>
+  <tr><td><b>Trailing RV</b></td><td>RV measured over a window <i>ending before</i> the observation (here, the prior 21 trading days). The standard backward-looking benchmark forecast.</td></tr>
+  <tr><td><b>Spearman IC</b></td><td>Information Coefficient = the rank correlation between the signal and the outcome. Ranges &minus;1 to +1; +0.66 means a strong, monotone positive relationship robust to outliers (ranks, not raw values).</td></tr>
+  <tr><td><b>Newey-West (NW) t-stat</b></td><td>A t-statistic computed with a HAC (heteroskedasticity- and autocorrelation-consistent) variance estimator. It corrects standard errors for overlapping/serially-correlated observations, which would otherwise overstate significance. &ldquo;NW(2)&rdquo; = 2 lags. |t| &ge; ~2 is conventionally &ldquo;significant.&rdquo;</td></tr>
+  <tr><td><b>Bonferroni correction</b></td><td>A conservative multiple-testing adjustment: if you test <i>m</i> signals, raise the significance bar so the chance of <i>any</i> false positive stays controlled. Here m=60 raises the bar to |t| &ge; 3.2.</td></tr>
+  <tr><td><b>Block bootstrap</b></td><td>A resampling method that draws contiguous blocks of data (preserving autocorrelation) to build a confidence interval. &ldquo;CI excludes zero&rdquo; = the effect is unlikely to be noise. Here: 6-month blocks, 2000 resamples.</td></tr>
+  <tr><td><b>Era stability</b></td><td>Whether the effect holds across distinct market regimes rather than concentrating in one period. Tested by splitting the sample (here at the Jan-2024 spot-ETF launch) and requiring same sign and independent significance in each part.</td></tr>
+  <tr><td><b>Variance risk premium (VRP)</b></td><td>The systematic gap between implied and subsequently realized variance &mdash; compensation paid for bearing volatility risk. It explains why IV forecasts vol but not direction.</td></tr>
+  <tr><td><b>QLIKE</b></td><td>A volatility-forecast loss function, <code>r/f &minus; ln(r/f) &minus; 1</code> (r = realized variance, f = forecast). It penalizes under-forecasting volatility harder than over-forecasting &mdash; the appropriate loss for risk sizing. Lower is better.</td></tr>
+  <tr><td><b>Diebold-Mariano (DM) test</b></td><td>A formal test of whether one forecast&rsquo;s loss is significantly lower than another&rsquo;s. A negative DM statistic vs a benchmark means the candidate forecast wins.</td></tr>
+  <tr><td><b>Pre-registration</b></td><td>Fixing the hypotheses, signal list, sample, and decision rules <i>in writing before</i> computing results &mdash; the discipline that prevents fitting a story to noise.</td></tr>
+  <tr><td><b>Research fidelity vs binding</b></td><td>&ldquo;Research fidelity&rdquo; = a first-pass study sufficient to decide whether to invest more. &ldquo;Binding&rdquo; = the full out-of-sample / walk-forward / selection-bias validation required before any capital decision.</td></tr>
+</table>
+
+<h2>4. Signal specification (exact formulas)</h2>
+<p>All features are computed from a single monthly snapshot &mdash; the earliest complete hourly Deribit options snapshot on the 1st of each month (typically 01:00 UTC, chosen as the first snapshot with quote count &ge; 50% of that day&rsquo;s maximum). Every input is lookahead-safe (see Section 5).</p>
+<table>
+  <tr><th>Input</th><th>Exact construction</th></tr>
+  <tr><td><b><code>atm_iv_30</code></b> (headline feature)</td><td>Per expiry: ATM mark-IV by linear interpolation of mark-IV at delta = +0.50 (call) and &minus;0.50 (put), averaged (filters: &ge;3 quotes/side, delta in [0.03, 0.97], time-to-expiry 2&ndash;200 days, mark-IV in (1, 500)). Constant-maturity 30-day value by linear interpolation <i>in total variance</i> (IV&sup2;&middot;T) across the two bracketing expiries; flat extrapolation outside the listed range (flagged). Also computed at 7- and 90-day maturities.</td></tr>
+  <tr><td><b>Target:</b> <code>fwd_rv_h</code></td><td><span class="formula">fwd_rv_h = sqrt( 252 &middot; mean[ daily 5-minute realized variance ] over trading days anchor+1 … anchor+h )</span> where the anchor = the first Bitcoin futures trading day on/after the 1st. Horizons h &isin; {5, 10, 21} trading days. Daily realized variance = sum of squared 5-minute log returns.</td></tr>
+  <tr><td><b>Target:</b> <code>fwd_ret_h</code></td><td>Log close-to-close return over h trading days from the anchor (the directional target for H2).</td></tr>
+  <tr><td><code>rv_trail_30</code> (benchmark)</td><td><span class="formula">sqrt( 252 &middot; mean[ daily 5-min realized variance ] over the last 21 trading days ending strictly BEFORE the 1st )</span> (&ge;15 days required). The backward-looking competitor to <code>atm_iv_30</code>.</td></tr>
+  <tr><td><code>vrp_30</code></td><td><code>atm_iv_30/100 &minus; rv_trail_30</code> &mdash; the (trailing) variance-risk-premium proxy.</td></tr>
+  <tr><td>Term-structure / skew</td><td><code>ts_slope_7_90</code> = atm_iv_90 &minus; atm_iv_7; <code>ts_slope_30_90</code> = atm_iv_90 &minus; atm_iv_30; <code>rr25_30</code> = 25-delta risk reversal; <code>bf25_30</code> = 25-delta butterfly (all interpolated to 30 days).</td></tr>
+  <tr><td>Positioning</td><td><code>pc_oi_ratio</code> = put open-interest / call open-interest; <code>total_oi_btc/usd</code>, <code>log_total_oi_usd</code> = aggregate open interest.</td></tr>
+</table>
+
+<h2>5. Data &amp; environment</h2>
+<ul>
+  <li><b>Options data.</b> Deribit Bitcoin options chain, hourly surface snapshots, month-start days only, 2019-10 &rarr; 2026-06 (81 monthly files), drawn from 19V&rsquo;s market-data store. <b>Structural limitation:</b> the historical archive holds only ~one snapshot day per month, which is why the study is monthly and low-powered; continuously-running collectors now accrue daily snapshots going forward.</li>
+  <li><b>Underlying / returns &amp; RV.</b> CME Bitcoin futures, continuous 1-minute bars, 2021-04-09 &rarr; 2026-05-19. Daily realized variance from 5-minute log returns.</li>
+  <li><b>Usable sample.</b> The overlap of the two datasets gives <b>61 monthly observations, 2021-05-01 &rarr; 2026-05-01</b> (60 have a complete 21-day forward window). This is the binding constraint on power: any effect with a true |IC| below ~0.25 is undetectable at this n.</li>
+  <li><b>Environment / reproducibility.</b> macOS, Python 3.13 (pandas, numpy, matplotlib, pyarrow; HAC/bootstrap implemented directly in numpy). Single random seed <b>20260611</b> throughout; pipeline is deterministic and rebuildable end-to-end from the stored snapshots.</li>
+</ul>
+<h3>5.1 Lookahead &amp; data-integrity audit</h3>
+<table>
+  <tr><th>Check</th><th>Status</th><th>Detail</th></tr>
+  <tr><td>Timestamp conflation</td><td><span class="gd">PASS</span></td><td>Features read the 01:00-UTC snapshot of the 1st; trailing RV ends the <i>prior</i> trading day; forward targets anchor at the close of the first trading day on/after the 1st &mdash; at least ~17 hours after the feature snapshot. No future information leaks into a feature.</td></tr>
+  <tr><td>Vintage / revision</td><td><span class="gd">PASS</span></td><td>Option snapshots are immutable exchange captures; futures bars are unrevised.</td></tr>
+  <tr><td>Survivorship</td><td><span class="gd">PASS</span></td><td>Full chain snapshot including zero-bid and expired strikes in their month.</td></tr>
+  <tr><td>Proxy / async venue</td><td>NOTED</td><td>IV references 24/7 Deribit Bitcoin; RV is measured on CME futures hours (no weekends), understating round-the-clock vol by roughly &radic;(5/7). This biases the <i>level</i> of the variance risk premium (Section 12) but not the rank correlations, which are what the headline result relies on.</td></tr>
+</table>
+
+<h2 class="pagebreak">6. Methodology &amp; statistical tests</h2>
+<p>Each test below is defined so the results in Sections 8&ndash;9 are interpretable without outside reference.</p>
+<ul>
+  <li><b>Rank correlation (IC).</b> Spearman correlation between each feature and each target, with t &approx; IC&middot;&radic;((n&minus;2)/(1&minus;IC&sup2;)). Rank-based to neutralize Bitcoin&rsquo;s fat tails.</li>
+  <li><b>Regression significance.</b> Per-feature OLS (standardized) with Newey-West(2) t-statistics, correcting for the mild overlap of monthly observations at the 21-day horizon.</li>
+  <li><b>Multiplicity control.</b> A family of <b>m = 60</b> tests was declared in advance (10 features &times; 6 targets). The Bonferroni significance bar is therefore |t| &ge; 3.2; |t| in [2, 3.2] is treated as &ldquo;interesting, unconfirmed.&rdquo;</li>
+  <li><b>Confidence intervals.</b> Circular block bootstrap, 6-month blocks, 2000 resamples, on the headline ICs &mdash; a CI that excludes zero is the evidence the effect is not noise.</li>
+  <li><b>Incremental / encompassing test.</b> Bivariate regression <code>fwd_rv ~ z(atm_iv_30) + z(rv_trail_30)</code>: if IV retains its t-statistic while trailing RV collapses, IV carries information beyond mere volatility persistence.</li>
+  <li><b>Era split.</b> Sample divided at 2024-01-01 (Bitcoin spot-ETF launch). Each half must show the same sign and independent significance.</li>
+  <li><b>Forecast-loss tests (Study 2).</b> QLIKE and RMSE on volatility points; Diebold-Mariano loss differentials versus the trailing-RV benchmark with Newey-West(2) t-statistics; block-bootstrap CI on the mean loss differential.</li>
+</ul>
+
+<h2>7. The validation-gate framework</h2>
+<p>19V filters candidate signals through a numbered gate stack designed to reject statistical placebos. The gates referenced in the results are defined here so the scorecards are self-explanatory.</p>
+<table>
+  <tr><th>Gate</th><th>What it requires</th></tr>
+  <tr><td><b>G1 &mdash; Joint-set sizing</b></td><td>At least 30 independent observations (absolute floor) before any inference is trusted.</td></tr>
+  <tr><td><b>G2 &mdash; Data resolution</b></td><td>The data granularity must support the claim. Monthly snapshots support monthly-horizon claims only &mdash; nothing intraday.</td></tr>
+  <tr><td><b>G4 &mdash; t-stat threshold</b></td><td>|t| &ge; 1.5 when n &lt; 100 (the binding bootstrap gates carry the load at higher n).</td></tr>
+  <tr><td><b>G8 &mdash; Block-bootstrap CI</b></td><td>The bootstrap confidence interval must not straddle zero.</td></tr>
+  <tr><td><b>G14 &mdash; Era sign agreement</b></td><td>Same sign across observable market eras (run before any pooled statistic).</td></tr>
+  <tr><td><b>G15 &mdash; Single-era concentration</b></td><td>No single era may carry more than 50% of the effect.</td></tr>
+  <tr><td><b>G16 &mdash; Horizon smoothness</b></td><td>The effect should vary smoothly across nearby horizons, not spike at one cherry-picked horizon.</td></tr>
+  <tr><td><b>G20 &mdash; Magnitude vs direction</b></td><td>A signal that predicts the <i>size</i> of moves must be typed as a volatility claim, not mislabeled as a directional edge.</td></tr>
+</table>
+
+<h2>8. Study 1 &mdash; signal study (results)</h2>
+<p><span class="tag">Pre-registered signal study</span> &nbsp;Verdict <span class="verdict v-iter">ITERATE</span> &nbsp;(H1 volatility = advance-as-input &middot; H2 direction = <span class="verdict v-kill">KILL</span>)</p>
+<p>n = 61 monthly observations (60 at the 21-day horizon), 2021-05 &rarr; 2026-05. Gate scorecard: <b>11 PASS, 2 FAIL</b> (both on the directional hypothesis, driving its kill), 6 not-applicable.</p>
+
+<h3>8.1 H1 &mdash; implied vol forecasts forward realized vol</h3>
+<table>
+  <tr><th>Feature &rarr; forward RV</th><th>IC h=5</th><th>IC h=10</th><th>IC h=21</th><th>NW t (h=21)</th><th>Clears Bonferroni 3.2?</th></tr>
+  <tr><td><b>atm_iv_30</b></td><td>+0.635</td><td>+0.638</td><td><b>+0.660</b></td><td><b>+6.69</b></td><td><span class="gd">YES (all horizons)</span></td></tr>
+  <tr><td>rv_trail_30 (benchmark)</td><td>+0.528</td><td>+0.481</td><td>+0.498</td><td>+4.68</td><td>YES &mdash; but subsumed (8.2)</td></tr>
+  <tr><td>bf25_30 (skew)</td><td>+0.219</td><td>+0.286</td><td>+0.300</td><td>+2.38</td><td>no</td></tr>
+  <tr><td>ts_slope_7_90 (term)</td><td>&minus;0.291</td><td>&minus;0.270</td><td>&minus;0.189</td><td>&minus;1.69</td><td>no</td></tr>
+  <tr><td>vrp_30</td><td>+0.086</td><td>+0.144</td><td>+0.122</td><td>&minus;0.11</td><td>no</td></tr>
+  <tr><td>pc_oi_ratio</td><td>+0.158</td><td>+0.129</td><td>+0.170</td><td>+1.59</td><td>no &mdash; sign-flips across eras (killed)</td></tr>
+</table>
+<p>Only <code>atm_iv_30</code> clears the strict bar, and it does so at every horizon with a smooth, near-flat horizon profile (+0.635 / +0.638 / +0.660) &mdash; satisfying the horizon-smoothness gate. The block-bootstrap 95% confidence interval on the headline IC is <b>[+0.377, +0.788]</b>, far from zero.</p>
+<div class="twocol">
+  <figure><img src="../figures/deribit_scatter_iv_fwdrv.png"><figcaption>Month-start implied vol vs forward 21-day realized vol. Both market eras participate; the relationship is not carried by a few outliers.</figcaption></figure>
+  <figure><img src="../figures/deribit_ic_heatmap.png"><figcaption>Information coefficient across all features and horizons. atm_iv_30 (top row) dominates and is horizon-smooth.</figcaption></figure>
+</div>
+
+<h3>8.2 The decisive test &mdash; implied vol subsumes trailing realized vol</h3>
+<p>The most important robustness check: does implied vol add information <i>beyond</i> simply extrapolating recent volatility? The bivariate regression <code>fwd_rv ~ z(atm_iv_30) + z(rv_trail_30)</code> answers it.</p>
+<table>
+  <tr><th>Horizon</th><th>coefficient on IV</th><th>t on IV</th><th>coefficient on trailing RV</th><th>t on trailing RV</th></tr>
+  <tr><td>h = 5</td><td>+0.109</td><td><b>+3.23</b></td><td>&minus;0.006</td><td>&minus;0.20</td></tr>
+  <tr><td>h = 10</td><td>+0.098</td><td><b>+3.30</b></td><td>+0.002</td><td>+0.05</td></tr>
+  <tr><td>h = 21</td><td>+0.085</td><td><b>+3.72</b></td><td>+0.022</td><td>+0.72</td></tr>
+</table>
+<p><b>Implied vol fully absorbs trailing realized vol at every horizon</b> &mdash; once IV is in the model, the backward-looking estimate contributes nothing (|t| &le; 0.72). The forecast is genuinely forward-looking information, not volatility persistence in disguise. This is the single result that separates a real edge from an artifact.</p>
+<div class="twocol">
+  <figure><img src="../figures/deribit_incremental_iv_vs_rv.png"><figcaption>Incremental value: implied vol keeps its significance; trailing RV collapses to insignificance once IV is included.</figcaption></figure>
+  <figure><img src="../figures/deribit_bootstrap_ci.png"><figcaption>Block-bootstrap distribution of the headline IC &mdash; the 95% interval [+0.377, +0.788] sits well clear of zero.</figcaption></figure>
+</div>
+
+<h3>8.3 Era stability and the directional kill</h3>
+<table>
+  <tr><th>Market era</th><th>n</th><th>atm_iv_30 &rarr; forward 21d RV: IC (t)</th><th>Sign</th></tr>
+  <tr><td>2021-05 &hellip; 2023-12 (&ldquo;pre-ETF&rdquo;)</td><td>32</td><td><b>+0.626 (t +4.39)</b></td><td>+</td></tr>
+  <tr><td>2024-01 &hellip; 2026-05 (&ldquo;post-ETF&rdquo;)</td><td>28</td><td><b>+0.556 (t +3.41)</b></td><td>+</td></tr>
+</table>
+<p>Both observable eras show the same sign, each independently significant, with balanced magnitude (neither era carries &gt;50% of the effect) &mdash; satisfying both era gates. The relationship held through the 2021 crash, the 2022 deleveraging, the 2023 chop, the 2024 ETF launch, and the 2025&ndash;26 institutionalization.</p>
+<p><b>Directional hypothesis (H2): killed.</b> No pre-registered feature reaches |t| &ge; 1.5 against any forward-return horizon except a single outlier-driven cell (put/call OI ratio, with a rank IC of only &minus;0.065) that sits exactly at the one-in-sixty false-positive expectation. The variance-risk-premium-to-return bootstrap interval [&minus;0.336, +0.196] straddles zero. The surface predicts <i>how much</i> Bitcoin moves, not <i>which way</i> &mdash; the pre-registered expected outcome.</p>
+<figure><img src="../figures/deribit_era_split_ic.png" style="max-width:60%;"><figcaption>Era-split information coefficient &mdash; the forecasting edge is present and significant in both observable regimes.</figcaption></figure>
+
+<h2 class="pagebreak">9. Study 2 &mdash; volatility-conditioner backtest</h2>
+<p><span class="tag">Application backtest</span> &nbsp;Verdict <span class="verdict v-hand">HANDOFF</span> (ready for binding validation)</p>
+<p>Because the directional edge is dead, the honest way to &ldquo;backtest&rdquo; the forecast is as a <b>risk conditioner</b>: does sizing a position with the IV forecast beat sizing it with the conventional trailing-RV estimate? The test runs a passive long-Bitcoin exposure and rescales it monthly to a fixed volatility target:</p>
+<span class="formula">weight_t = min( 0.30 / forecast_vol_t , 1.5 )   &mdash; rebalanced each month-start; target = 30% annualized vol (20% tested as a sensitivity); cap at 1.5&times;.</span>
+<p>The position is passive long Bitcoin beta &mdash; <b>no directional claim is made</b>. The deliverable is purely: forecast accuracy, volatility-targeting fidelity, and the risk reduction attributable to better sizing. The test compares two ways of estimating the volatility used to size the position: the <b>implied-vol forecast</b> (this dossier&rsquo;s signal) against the <b>conventional trailing-volatility estimate</b> (the standard backward-looking benchmark), plus an unsized constant position as a floor.</p>
+
+<h3>9.1 Forecast accuracy &mdash; implied vol vs the conventional estimate</h3>
+<table>
+  <tr><th>Forecast method</th><th>mean QLIKE (lower = better)</th><th>RMSE (vol pts)</th><th>rank corr. vs realized</th></tr>
+  <tr><td><b>Implied-vol forecast (recommended)</b></td><td><b>0.147</b></td><td>16.3</td><td>+0.660</td></tr>
+  <tr><td>Conventional trailing-vol forecast</td><td>0.215</td><td>18.4</td><td>+0.498</td></tr>
+</table>
+<p>The implied-vol forecast is more accurate on every measure. The formal test that the gap is real (Diebold-Mariano; negative = implied vol wins) gives <b>t = &minus;2.13</b>, with a bootstrap 95% interval [&minus;0.136, &minus;0.015] that excludes zero. <b>The pre-registered primary test passes: implied vol sizes a position better than the conventional estimate.</b></p>
+<p style="font-size:9pt;color:#555;">Two other approaches were checked and set aside: bias-correcting the implied-vol forecast made it worse (Section 9.3), and a 50/50 blend of the two was marginally the strongest statistically but adds complexity for no robust gain. <b>The raw implied-vol forecast is the recommended choice</b> &mdash; simplest and most robust.</p>
+<figure><img src="../figures/iv_conditioner_qlike_dm_bars.png" style="max-width:60%;"><figcaption>Forecast-accuracy advantage (QLIKE loss differential) of each IV variant over the trailing-RV benchmark &mdash; all beat it; raw IV and the blend clear the significance floor.</figcaption></figure>
+
+<h3>9.2 Volatility-targeting fidelity and risk</h3>
+<table>
+  <tr><th>Monthly sizing method (30% vol target)</th><th>tracking error (vol pts, lower=better)</th><th>mean realized position vol</th><th>Sharpe*</th><th>max drawdown*</th><th>cost (bps/yr)</th></tr>
+  <tr><td><b>Implied-vol sizing (recommended)</b></td><td><b>8.19</b></td><td>28.4%</td><td>0.49</td><td>&minus;43.1%</td><td><b>8.7</b></td></tr>
+  <tr><td>Conventional trailing-vol sizing</td><td>10.18</td><td>31.4%</td><td>0.51</td><td>&minus;47.9%</td><td>13.6</td></tr>
+  <tr><td>No volatility sizing (constant)</td><td>28.25</td><td>51.8%</td><td>0.39</td><td>&minus;72.9%</td><td>&mdash;</td></tr>
+</table>
+<p>Implied-vol sizing tracks the volatility target <b>13&ndash;20% more tightly</b> than the conventional estimate (paired difference t = &minus;2.03), and runs closer to target on average &mdash; the conventional backward-looking estimate systematically <i>overshoots</i> because it under-forecasts into volatility expansions, exactly when overshooting hurts most. Versus an unsized position, volatility targeting roughly <b>halves the maximum drawdown</b>, and implied-vol sizing is also <b>~35% cheaper to run</b> because its forecast is smoother, requiring smaller monthly rebalances.</p>
+<div class="warn"><b>*Read Sharpe and drawdown as illustrative only.</b> At 60 monthly observations, differences in Sharpe between sizing methods are statistically <b>unpowered</b> &mdash; they mostly reflect the path of Bitcoin&rsquo;s direction (a quantity this study makes no claim about), not sizing skill. They are reported for completeness and carry no verdict weight. The defensible, powered findings are the forecast-accuracy and tracking-fidelity results above.</div>
+<div class="twocol">
+  <figure><img src="../figures/iv_conditioner_tracking_fidelity.png"><figcaption>Monthly realized position volatility vs the 30% target &mdash; IV sizing hugs the target; trailing-RV sizing overshoots.</figcaption></figure>
+  <figure><img src="../figures/iv_conditioner_weights_timeseries.png"><figcaption>Monthly position weights &mdash; the IV forecast produces smoother, lower-turnover sizing.</figcaption></figure>
+</div>
+<figure><img src="../figures/iv_conditioner_scaled_equity.png" style="max-width:66%;"><figcaption>Scaled-exposure equity curve (illustrative, no verdict weight) &mdash; volatility targeting roughly halves the unsized drawdown.</figcaption></figure>
+
+<h3>9.3 An informative negative &mdash; bias-correcting the forecast makes it worse</h3>
+<p>A bias-corrected variant attempted to remove implied vol&rsquo;s known upward level bias with a rolling regression calibration. It backfired: bias <i>increased</i> (to +6.5 from +3.9 vol points) and rank quality collapsed (rank correlation 0.40 versus 0.66 for the raw forecast). At this sample size the calibration is itself an overfit &mdash; it is trained on the high-volatility 2021&ndash;22 period and goes stale through the post-ETF regime shift. <b>Conclusion: use the raw implied-vol forecast; do not bias-correct at monthly cadence.</b></p>
+
+<h3>9.4 Verdict and what remains</h3>
+<p>The pre-registered decision rule is met on all three required clauses &mdash; the primary forecast-accuracy test passes (t = &minus;2.13), the advantage is era-stable (same sign in both halves, significant in the recent half), and tracking error is better, not worse. No kill trigger fires. The claim that advances is <b>exactly and only</b>: <i>implied-vol forecasting improves monthly volatility-targeting of a Bitcoin position relative to trailing realized vol &mdash; better forecast, tighter targeting, lower drawdown and cost. No directional claim.</i> The study is packaged and ready for the binding validation pass (Section 14).</p>
+
+<h2 class="pagebreak">10. Why this is worth preserving</h2>
+<table>
+  <tr><th>Property</th><th>Evidence</th><th>Why it matters</th></tr>
+  <tr><td><b>Statistically real</b></td><td>NW t +6.69; clears Bonferroni across 60 tests</td><td>Survives strict multiple-testing &mdash; not the luckiest of many tries. The bar most candidate signals fail.</td></tr>
+  <tr><td><b>Economically large</b></td><td>IC +0.66</td><td>A strong forecast by any standard, and the largest in the entire research effort.</td></tr>
+  <tr><td><b>Era-stable</b></td><td>+0.626 / +0.556 across the ETF divide</td><td>Holds across distinct regimes &mdash; structural, not a one-period fluke.</td></tr>
+  <tr><td><b>Non-redundant</b></td><td>Subsumes trailing RV (t 0.72)</td><td>Adds information beyond the cheap obvious predictor &mdash; it earns its place.</td></tr>
+  <tr><td><b>Backtests as a conditioner</b></td><td>DM t &minus;2.13; tracking &minus;13&ndash;20%; drawdown ~halved</td><td>The forecast edge converts into measurably better position sizing, not just a regression statistic.</td></tr>
+  <tr><td><b>Literature-consistent</b></td><td>Matches 30+ years of evidence, including Bitcoin-specific peer-reviewed work (Section 13)</td><td>Independent external validation &mdash; the result is a reproduction of established science, sharply lowering the chance it is a data-mining artifact.</td></tr>
+  <tr><td><b>Mechanistically grounded</b></td><td>Forward-looking vol expectation absent from trailing RV</td><td>We can say <i>why</i> it works, not merely that it does &mdash; the difference between a tradeable prior and an overfit.</td></tr>
+</table>
+<p>Every other Bitcoin idea in the research effort was rejected. This one passed every gate it touched, has a clear mechanism, backtests cleanly as a conditioner, and reproduces decades of academic evidence. It is the one durable piece of intellectual capital the effort produced.</p>
+
+<h2>11. How to use it &mdash; operating rules (entry &amp; exit)</h2>
+<p>The signal predicts <i>how much</i> Bitcoin will move, not <i>which way</i>. It therefore is not a buy/sell trigger; it is a <b>sizing and risk rule</b>. There are two concrete ways to operate it, both stated in full below.</p>
+
+<h3>11.1 Operating rule A &mdash; volatility-targeted sizing (the backtested rule)</h3>
+<div class="def">
+<b>Forecast.</b> On the 1st of each month, read the Deribit 30-day ATM implied volatility (annualized, e.g. 55 = 55%); call it <code>IV</code>. This is the volatility forecast for the coming month.<br>
+<b>Size.</b> Set position size as a fraction of capital: &nbsp;<code>weight = min( target_vol / IV , 1.5 )</code>&nbsp; with <code>target_vol = 0.30</code> (a 30% annualized risk target; cap at 1.5&times; capital).<br>
+<b>Entry.</b> Establish/adjust the position to that weight at the close of the first trading day on or after the 1st.<br>
+<b>Exit / rebalance.</b> Hold until the next month-start, then recompute <code>IV</code> and resize. There is no stop and no directional exit &mdash; the rule only scales exposure. Lower implied vol &rarr; larger position; higher implied vol &rarr; smaller position.<br>
+<b>Worked example.</b> If month-start <code>IV</code> = 60%, weight = 0.30/0.60 = 0.50 (half capital). If <code>IV</code> = 40%, weight = 0.75. If <code>IV</code> = 20%, weight = min(1.50, 1.5) = 1.50 (capped).
+</div>
+<p>This is exactly the rule tested in Section 9. It is venue-agnostic risk sizing; the monthly hold itself is not intended for an intraday-flat execution account &mdash; its real use is Rule B.</p>
+
+<h3>11.2 Operating rule B &mdash; volatility-regime gate for an executable strategy</h3>
+<div class="def">
+<b>Read.</b> Track the implied-vol level as a rolling percentile (e.g. its rank over the trailing 12 months).<br>
+<b>Gate / scale.</b> When implied vol is high (e.g. top tercile), reduce the size of, or stand down, an executable intraday strategy; when low, run normal or larger size &mdash; because high implied vol forecasts high realized vol (larger swings, wider stops, worse risk-adjusted fills), and low implied vol forecasts calm.<br>
+<b>Entry/exit of the host strategy are unchanged</b> &mdash; this rule only modulates <i>how much</i> the host strategy risks, using the implied-vol forecast as the risk dial.
+</div>
+<p>Rule B is the deployable use on an intraday-flat execution account: the conditioner sizes/gates a strategy that <i>is</i> executable, rather than holding a monthly position itself.</p>
+
+<h3>11.3 Where it adds value</h3>
+<p>In both modes the result is a <b>conditioner, not a directional strategy</b> &mdash; directional use is correctly dead, because the implied-minus-realized gap is a risk premium, not a direction forecast. Its value is in improving <i>other</i> decisions:</p>
+<ul>
+  <li><b>Regime / volatility-gate input.</b> Feed the implied-vol level (or its rolling percentile) into a volatility-regime gate that decides when and how large an executable strategy should trade, benchmarked against the cheaper trailing-RV gate it outperforms.</li>
+  <li><b>Position sizing / volatility targeting.</b> Demonstrated directly in Study 2 &mdash; a +0.66-IC forward-vol forecast sizes tighter and cheaper than the conventional estimate.</li>
+  <li><b>Risk overlay.</b> Use the implied-vol level to scale aggregate risk up or down ahead of realized-vol expansions, which it anticipates.</li>
+  <li><b>Volatility-premium screen.</b> When the implied-minus-realized gap is unusually wide, short-volatility structures are statistically favored &mdash; subject to options-venue feasibility, which has not yet been assessed, and noting the premium&rsquo;s sign for Bitcoin is sensitive to how realized vol is measured (Section 12).</li>
+</ul>
+<p><b>Strategic value.</b> 19V&rsquo;s genuine edges have repeatedly proven locked to a specific execution venue. A venue-agnostic <i>conditioner</i> that sharpens the sizing and timing of whatever <i>is</i> executable is exactly the kind of reusable component that survives a change of venue &mdash; which is why it is worth banking even before the final validation pass.</p>
+
+<h2>12. What is interesting / non-obvious</h2>
+<ul>
+  <li><b>The forecast is unusually strong &mdash; treated as a flag, not just a win.</b> Comparable equity studies explain 30&ndash;50% of volatility variation; +0.66 sits at the top of that range. The decisive guard against an inflated number is the test in Section 8.2 (implied vol subsumes trailing vol), which rules out the &ldquo;it&rsquo;s just persistence&rdquo; explanation. Trailing vol alone already scores +0.50 here, so +0.66 for implied vol is in-family, not anomalous.</li>
+  <li><b>The directional kill is the textbook outcome, not a disappointment.</b> Decades of variance-risk-premium research show the implied-minus-realized gap is compensation for bearing volatility risk &mdash; it predicts volatility, not direction. Finding exactly that in Bitcoin is reassuring corroboration.</li>
+  <li><b>Bias-correcting the forecast backfired</b> (Section 9.3) &mdash; a clean, counter-intuitive lesson: at small samples, &ldquo;correcting&rdquo; a known bias overfits and destroys the signal. The raw, untouched forecast is best.</li>
+  <li><b>Bitcoin&rsquo;s volatility premium has the opposite sign to equities.</b> Measured naively the premium looks positive (+3.9 vol points), but because realized vol here is computed on weekday futures hours while implied vol references a 24/7 market, the weekend-adjusted premium is roughly &minus;5.6 vol points &mdash; Bitcoin implied vol trades <i>cheap</i> relative to true round-the-clock realized vol. The premium&rsquo;s <i>level</i> is therefore definition-dependent; only the rank relationships were relied upon.</li>
+  <li><b>History warned us about exactly this setup.</b> An influential 1993 study found stock-index implied vol had near-zero predictive power; a 1998 study showed that was an artifact of overlapping data windows, and that implied vol is in fact an efficient forecast. Our 21-day windows overlap in the same way &mdash; which is precisely why the Newey-West correction and the era-stability checks are doing essential work here.</li>
+</ul>
+
+<h2 class="pagebreak">13. Supporting academic literature</h2>
+<p>The result reproduces one of the most established relationships in quantitative finance. The references below are grouped by the specific claim each supports; the closest single precedent is Hoang &amp; Baur (2020), which finds the same effect on the same exchange (Deribit Bitcoin options).</p>
+
+<h3>Cluster 1 &mdash; implied vol forecasts future realized vol (foundational)</h3>
+<ol class="refs">
+  <li><span class="auth">Christensen &amp; Prabhala (1998)</span> &mdash; <span class="venue">J. Financial Economics</span> 50:125&ndash;150. At-the-money one-month index implied vol is an unbiased, efficient forecast of subsequent realized vol; also the paper that resolved the earlier skeptical result as an overlapping-data artifact. <br><a href="https://www.sciencedirect.com/science/article/pii/S0304405X98000348">sciencedirect.com/science/article/pii/S0304405X98000348</a></li>
+  <li><span class="auth">Jorion (1995)</span> &mdash; <span class="venue">Journal of Finance</span> 50(2):507&ndash;528. Currency-option implied vols predict future vol and outperform historical-vol models, with less measurement error than index options. <br><a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1540-6261.1995.tb04793.x">onlinelibrary.wiley.com/doi/abs/10.1111/j.1540-6261.1995.tb04793.x</a></li>
+  <li><span class="auth">Szakmary, Ors, Kim &amp; Davidson (2003)</span> &mdash; <span class="venue">J. Banking &amp; Finance</span> 27(11):2151&ndash;2175. Across 35 futures-option markets on eight exchanges, implied vol outperforms historical vol for the large majority &mdash; the breadth result. <br><a href="https://www.sciencedirect.com/science/article/abs/pii/S0378426602003230">sciencedirect.com/science/article/abs/pii/S0378426602003230</a></li>
+  <li><span class="auth">Poon &amp; Granger (2003)</span> &mdash; <span class="venue">Journal of Economic Literature</span> 41(2):478&ndash;539. Survey of 93 forecasting studies; option-implied vol generally beats historical-vol models. The standard reference establishing the result is settled. <br><a href="https://www.aeaweb.org/articles?id=10.1257/002205103765762743">aeaweb.org/articles?id=10.1257/002205103765762743</a></li>
+  <li><span class="auth">Fleming (1998)</span> &mdash; <span class="venue">J. Empirical Finance</span> 5(4):317&ndash;345. S&amp;P 100 implied vol is a biased but informationally efficient realized-vol forecast; the bias is economically small. <span class="canon">verify DOI before formal citation</span></li>
+  <li><span class="auth">Canina &amp; Figlewski (1993)</span> &mdash; <span class="venue">Review of Financial Studies</span> 6(3):659&ndash;681. The famous counterpoint &mdash; index implied vol appears to have near-zero predictive power; later shown to be an overlapping-data / measurement artifact (see #1). Included as the cautionary tale matching our overlapping-window setup. <br><a href="https://academic.oup.com/rfs/article-abstract/6/3/659/1582244">academic.oup.com/rfs/article-abstract/6/3/659/1582244</a></li>
+</ol>
+
+<h3>Cluster 2 &mdash; implied vol subsumes historical vol (the Section 8.2 result)</h3>
+<ol class="refs" start="7">
+  <li><span class="auth">Blair, Poon &amp; Taylor (2001)</span> &mdash; <span class="venue">J. Econometrics</span> 105(1):5&ndash;26. Nearly all relevant volatility-forecasting information is contained in the implied-vol index; adding historical or high-frequency terms adds little &mdash; the direct analog of our encompassing result. <br><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=182128">papers.ssrn.com/sol3/papers.cfm?abstract_id=182128</a></li>
+  <li><span class="auth">Jiang &amp; Tian (2005)</span> &mdash; <span class="venue">Review of Financial Studies</span> 18(4):1305&ndash;1342. Model-free implied vol subsumes both Black-Scholes implied vol and historical vol &mdash; motivates testing a model-free version of our signal. <span class="canon">verify DOI</span></li>
+  <li><span class="auth">Day &amp; Lewis (1992)</span> &mdash; <span class="venue">J. Econometrics</span> 52(3):267&ndash;287. Implied vol carries information incremental to GARCH-type conditional-vol models. <span class="canon">verify DOI</span></li>
+  <li><span class="auth">Busch, Christensen &amp; Nielsen (2011)</span> &mdash; <span class="venue">J. Econometrics</span> 160(1):48&ndash;57. Implied vol has incremental power for realized vol and jumps across FX, stock, and bond markets &mdash; multi-asset confirmation. <br><a href="https://ideas.repec.org/a/eee/econom/v160y2011i1p48-57.html">ideas.repec.org/a/eee/econom/v160y2011i1p48-57.html</a></li>
+  <li><span class="auth">Britten-Jones &amp; Neuberger (2000)</span> &mdash; <span class="venue">Journal of Finance</span> 55(2):839&ndash;866. Foundational theory of model-free implied volatility &mdash; the variance-swap construction that a constant-maturity ATM IV approximates. <span class="canon">verify DOI</span></li>
+</ol>
+
+<h3>Cluster 3 &mdash; crypto / Bitcoin / Deribit-specific evidence</h3>
+<ol class="refs" start="12">
+  <li><span class="auth">Hoang &amp; Baur (2020)</span> &mdash; <span class="venue">Journal of Futures Markets</span> 40. Studies Deribit Bitcoin options and finds implied vol superior at 7/10/15-day horizons (weaker at 1 day), with an IV-plus-model combination best &mdash; &ldquo;the Bitcoin options market contains unique information.&rdquo; The closest precedent; our 21-day horizon sits in its sweet spot. <span class="tag">CLOSEST PRECEDENT</span><br><a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/fut.22144">onlinelibrary.wiley.com/doi/abs/10.1002/fut.22144</a></li>
+  <li><span class="auth">Alexander &amp; Imeraj (2021)</span> &mdash; <span class="venue">Journal of Alternative Investments</span> 23(4):84. Constructs a Bitcoin VIX from Deribit option prices (7M+ quotes) and studies its variance risk premium &mdash; validates the exact instrument and venue, and the model-free construction worth testing next. <br><a href="https://jai.pm-research.com/content/23/4/84">jai.pm-research.com/content/23/4/84</a></li>
+  <li><span class="auth">Venter et&nbsp;al. (2020)</span>, &ldquo;A Horserace of Volatility Models for Cryptocurrency&rdquo; &mdash; <span class="venue">arXiv 2010.07402</span>. Out-of-sample contest on Deribit Bitcoin; implied vol as a forecasting input versus GARCH-family models. <br><a href="https://arxiv.org/pdf/2010.07402">arxiv.org/pdf/2010.07402</a></li>
+  <li><span class="auth">&ldquo;Implied volatility estimation of Bitcoin options&hellip;&rdquo; (2021)</span> &mdash; <span class="venue">Financial Innovation</span> (Springer) 7. Documents the Bitcoin implied-vol surface and the implied-realized relationship &mdash; instrument background. <br><a href="https://link.springer.com/article/10.1186/s40854-021-00280-y">link.springer.com/article/10.1186/s40854-021-00280-y</a></li>
+</ol>
+
+<h3>Cluster 4 &mdash; variance risk premium (why directional use is dead)</h3>
+<ol class="refs" start="16">
+  <li><span class="auth">Carr &amp; Wu (2009)</span> &mdash; <span class="venue">Review of Financial Studies</span> 22(3):1311&ndash;1341. Defines and measures the variance risk premium; implied variance systematically exceeds subsequent realized variance. Establishes the implied-minus-realized gap as a premium, not a directional signal. <br><a href="https://academic.oup.com/rfs/article-abstract/22/3/1311/1581057">academic.oup.com/rfs/article-abstract/22/3/1311/1581057</a></li>
+  <li><span class="auth">Bollerslev, Tauchen &amp; Zhou (2009)</span> &mdash; <span class="venue">Review of Financial Studies</span> 22(11):4463&ndash;4492. The variance premium predicts returns only through a risk-compensation channel &mdash; the basis for &ldquo;conditioner, not directional alpha.&rdquo; <br><a href="https://academic.oup.com/rfs/article-abstract/22/11/4463/1565787">academic.oup.com/rfs/article-abstract/22/11/4463/1565787</a></li>
+  <li><span class="auth">Bakshi &amp; Kapadia (2003)</span> &mdash; <span class="venue">Review of Financial Studies</span> 16(2):527&ndash;566. Delta-hedged option gains are negative, evidencing a negative market volatility risk premium &mdash; implied vol is priced above expected realized vol. <br><a href="https://academic.oup.com/rfs/article-abstract/16/2/527/1579962">academic.oup.com/rfs/article-abstract/16/2/527/1579962</a></li>
+  <li><span class="auth">Bakshi, Kapadia &amp; Madan (2003)</span> &mdash; <span class="venue">Review of Financial Studies</span> 16(1):101&ndash;143. Risk-neutral moments extracted from option prices &mdash; the basis for treating implied vol as a risk-neutral expectation rather than a physical point forecast. <span class="canon">verify DOI</span></li>
+  <li><span class="auth">Bekaert &amp; Hoerova (2014)</span> &mdash; <span class="venue">J. Econometrics</span> 183(2):181&ndash;192. Decomposes the squared volatility index into a conditional-variance forecast plus a variance premium &mdash; the forecast-versus-premium split this work exploits. <span class="canon">verify DOI</span></li>
+  <li><span class="auth">Andersen, Bollerslev, Diebold &amp; Labys (2003)</span> &mdash; <span class="venue">Econometrica</span> 71(2):579&ndash;625. Foundational treatment of realized-volatility measurement from high-frequency data &mdash; the methodology defining the forward-RV target. <span class="canon">verify DOI</span></li>
+</ol>
+<p style="font-size:9pt;color:#555;"><b>Method references for Study 2:</b> Patton (2011), robust volatility loss functions including QLIKE; Diebold &amp; Mariano (1995), the forecast loss-differential test.</p>
+
+<h2 class="pagebreak">14. Forward-research playbook</h2>
+<p>The result is research-grade. The following steps would harden it toward a capital decision, in priority order.</p>
+<table>
+  <tr><th>#</th><th>Step</th><th>Rationale</th></tr>
+  <tr><td>1</td><td><b>Binding validation pass.</b> Run the conditioner through the full gate stack at daily resolution: within-month targeting fidelity, high-replication bootstrap, walk-forward folds, and selection-bias checks.</td><td>The owed step that converts this from research-grade to a ship/kill decision. The study is already packaged for it.</td></tr>
+  <tr><td>2</td><td><b>Model-free implied-vol version.</b> Rebuild the signal on a variance-swap / volatility-index style implied vol rather than a single at-the-money point.</td><td>Theory and the Bitcoin-VIX literature suggest model-free implied vol usually dominates; test whether the forecast strengthens.</td></tr>
+  <tr><td>3</td><td><b>Daily-cadence re-test.</b> Once the live collectors accrue 18&ndash;24 months of daily snapshots, repeat at daily frequency.</td><td>Converts ~12 observations/year into a daily panel, enabling daily regime gating and powering the weaker surface features.</td></tr>
+  <tr><td>4</td><td><b>Overlapping-data robustness.</b> Re-test with non-overlapping windows and alternative HAC-lag choices.</td><td>Overlapping forward windows are the classic source of inflated significance; confirm the result is not a window artifact.</td></tr>
+  <tr><td>5</td><td><b>Conditioner-on-executable test.</b> Gate or size an actual intraday, venue-executable strategy on the implied-vol regime and measure net-of-cost improvement.</td><td>The genuinely deployable use case, since the monthly carrier itself is not venue-executable.</td></tr>
+  <tr><td>6</td><td><b>Second-asset replication.</b> Repeat on Ethereum from the same options dataset.</td><td>Cross-asset generalization is the strongest predictor of a durable edge.</td></tr>
+</table>
+<h3>14.1 Known traps to control for</h3>
+<ul>
+  <li><b>Overlapping-observation bias</b> &mdash; inflates significance on overlapping forward windows; handled here via Newey-West, worth a non-overlapping cross-check.</li>
+  <li><b>Errors-in-variables in implied vol</b> (bid-ask noise, stale quotes, interpolation) &mdash; biases regression slopes; the thin historical archive amplifies it, and is the likely cause of the bias-correction backfire (Section 9.3).</li>
+  <li><b>Jump / fat-tail concentration</b> &mdash; confirm the forecast is not carried by a handful of extreme months (the scatter in Section 8.1 suggests it is not).</li>
+  <li><b>Realized-vol measurement choice</b> &mdash; sampling frequency and the weekday-vs-24/7 convention materially change the target and drive the premium-level ambiguity (Section 12); document and stress-test.</li>
+</ul>
+
+<h2>15. Limitations &amp; validation status</h2>
+<div class="warn">
+<b>Read before drawing conclusions.</b>
+<ul style="margin-top:4px;">
+  <li><b>Research fidelity, not validated.</b> Both studies are first-pass. The binding out-of-sample / walk-forward / selection-bias validation (Section 14, step 1) has not been run. Treat all numbers as research-grade.</li>
+  <li><b>Small sample.</b> 60&ndash;61 monthly observations. The headline forecast is robust at this n; anything Sharpe-shaped is not, and is reported as illustrative only.</li>
+  <li><b>Monthly resolution.</b> The archive supports monthly-horizon claims only; nothing intraday or weekly can be concluded until the daily collectors mature.</li>
+  <li><b>One macro cycle.</b> The data spans roughly one full Bitcoin market cycle; era-stability is established within that window, not beyond it.</li>
+  <li><b>Reused data window.</b> This Bitcoin sample has been examined multiple times for directional ideas; while the volatility target tested here is a different quantity, further re-use of the same window risks exhausting its statistical independence. Genuinely fresh or rigorously held-out data is preferred for the binding pass.</li>
+  <li><b>Premium level is definition-dependent.</b> The variance-risk-premium <i>level</i> depends on how realized vol is measured (weekday vs 24/7); only rank relationships were relied upon.</li>
+</ul>
+</div>
+
+<h2>16. Conclusion</h2>
+<p><b>What it is.</b> The month-start 30-day at-the-money implied volatility of Deribit Bitcoin options is a strong, reliable forecast of how volatile Bitcoin will be over the following month. It is the one genuinely positive, reproducible result from 19V&rsquo;s Bitcoin research effort &mdash; everything else tested was rejected.</p>
+<p><b>What was proven.</b> Two independent studies. The first established the forecast itself: rank correlation +0.66 with forward realized volatility, significant after the strictest multiple-testing correction, stable across every market era observed, and &mdash; the decisive check &mdash; it statistically absorbs the conventional backward-looking volatility estimate, proving it carries genuinely forward-looking information rather than just extrapolating recent calm or turbulence. The second study put the forecast to work sizing a position and showed it does the job better than the conventional estimate: more accurate, it tracks a risk target 13&ndash;20% more tightly, runs about 35% cheaper, and roughly halves drawdown versus an unsized position. The directional question &mdash; can it predict which <i>way</i> Bitcoin moves &mdash; was tested and answered no, exactly as theory predicts.</p>
+<p><b>How it helps us.</b> It is a <b>volatility/risk dial</b>, not a buy/sell signal. Use it (Section 11) to size positions and to gate executable strategies: ease off risk when it forecasts high volatility, lean in when it forecasts calm. Because it is a venue-agnostic risk tool rather than a standalone trade, it remains useful even as the strategies it supports change &mdash; making it durable, reusable research infrastructure rather than a single perishable edge.</p>
+<p><b>The one caveat.</b> Everything here is research-grade. The result is strong and internally consistent, but the final binding validation &mdash; a full out-of-sample and walk-forward pass on fresh data &mdash; has not yet been run. That is the immediate next step, after which the conditioner can be wired into live sizing decisions.</p>
+<p><b>Recommendation.</b> Preserve and bank this result; adopt the raw implied-vol forecast (no bias-correction) as a volatility-sizing and regime-gating input; and schedule the binding validation pass before it informs capital at risk.</p>
+
+<div class="notes">
+<b>Bottom line.</b> Deribit month-start 30-day ATM implied volatility is a strong, era-stable, literature-consistent forecast of Bitcoin&rsquo;s forward realized volatility (IC +0.66) that statistically absorbs the conventional trailing-vol estimate, and it sizes a position measurably better than that estimate (forecast-loss advantage, tighter volatility targeting, roughly halved drawdown). It is a <b>volatility/risk conditioner, not directional alpha</b> &mdash; the directional use was tested and correctly rejected. The immediate next step is the binding validation pass; until then every figure here is research-grade. The references in Section 13 marked &ldquo;verify DOI&rdquo; are standard, heavily-cited works worth a brief citation check before formal use.
+</div>
+
+<p class="footer">19V Capital &middot; BTC / Deribit options research &middot; 2026-06-11 &middot; Reproducible (seed 20260611) &middot; Sources: a pre-registered signal study (verdict ITERATE) and a volatility-conditioner application backtest (verdict HANDOFF). Status: research fidelity, not binding-validated. Headline: month-start 30d ATM IV &rarr; forward 21d realized vol; Spearman IC +0.66; Newey-West t +6.69; Bonferroni-clear across 60 tests; era-stable; subsumes trailing realized vol (t_IV +3.72 vs t_RVtrail +0.72). Directional use rejected. Role: volatility-conditioning.</p>
+
+</body>
+</html>

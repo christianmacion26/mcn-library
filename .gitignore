@@ -1,0 +1,19 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+*.bak
+
+# Build artifacts (we only commit the canonical HTML/PDF)
+build/
+dist/
+__pycache__/
+*.pyc
+*.pyo
+
+# Anything local — Library is fully checked in
+*.local

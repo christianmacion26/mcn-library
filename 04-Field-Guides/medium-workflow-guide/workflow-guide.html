@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Medium Christian — Workflow Guide</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    color: #1a1a1a; line-height: 1.5; font-size: 11pt; margin: 0;
+  }
+  h1 { font-size: 26pt; margin: 0 0 4px; letter-spacing: -0.5px; }
+  h2 { font-size: 15pt; margin: 26px 0 8px; padding-bottom: 4px;
+       border-bottom: 2px solid #111; }
+  h3 { font-size: 12pt; margin: 16px 0 4px; }
+  .sub { color: #666; font-size: 11pt; margin: 0 0 2px; }
+  .meta { color: #999; font-size: 9pt; margin: 0 0 4px; }
+  p { margin: 6px 0; }
+  code { background: #f2f2f2; padding: 1px 5px; border-radius: 4px;
+         font-family: "SF Mono", Menlo, monospace; font-size: 9.5pt; }
+  .lead { font-size: 11.5pt; color: #333; }
+  .pipe { display: flex; align-items: stretch; gap: 0; margin: 14px 0; flex-wrap: wrap; }
+  .step { flex: 1; min-width: 90px; background: #f7f7f7; border: 1px solid #e2e2e2;
+          border-radius: 8px; padding: 10px; text-align: center; }
+  .step .n { display:inline-block; width:20px; height:20px; line-height:20px;
+             background:#111; color:#fff; border-radius:50%; font-size:9pt; font-weight:700; }
+  .step .t { font-weight:700; font-size:10pt; margin:6px 0 2px; }
+  .step .d { font-size:8.5pt; color:#666; }
+  .arrow { align-self:center; font-size:16pt; color:#bbb; padding:0 2px; }
+  table { width:100%; border-collapse: collapse; margin: 8px 0; }
+  th, td { text-align:left; padding:8px 10px; border-bottom:1px solid #e5e5e5;
+           vertical-align: top; font-size:10pt; }
+  th { background:#111; color:#fff; font-size:9.5pt; }
+  tr:nth-child(even) td { background:#fafafa; }
+  .agent { font-weight:700; white-space:nowrap; }
+  .box { background:#f0f6ff; border:1px solid #cfe0f5; border-radius:8px;
+         padding:12px 14px; margin:12px 0; }
+  .box.warn { background:#fff7ed; border-color:#f5d9b8; }
+  .box h3 { margin-top:0; }
+  ul { margin:6px 0; padding-left:20px; }
+  li { margin:3px 0; }
+  .pill { display:inline-block; background:#111; color:#fff; font-size:8pt;
+          padding:2px 8px; border-radius:20px; margin-right:4px; }
+  .grid2 { display:flex; gap:14px; }
+  .grid2 > div { flex:1; }
+  .footer { margin-top:28px; padding-top:8px; border-top:1px solid #ddd;
+            color:#999; font-size:8.5pt; }
+  .key { color:#1a5fb4; font-weight:600; }
+</style>
+</head>
+<body>
+
+<h1>Medium Christian</h1>
+<p class="sub">The agent workflow for writing trading &amp; quant posts — so you just proofread.</p>
+<p class="meta">Voice: punchy / thread-style &nbsp;·&nbsp; Audience: mixed general-finance &nbsp;·&nbsp; Updated June 2026</p>
+
+<p class="lead">Eight agents do the work; the main Claude session is the conductor that runs them
+<b>in sequence</b> and passes each one's output to the next. Subagents can't call each other,
+so the session orchestrates. You only step in at two moments: <span class="key">the angle</span> (start)
+and <span class="key">the proofread</span> (end).</p>
+
+<h2>The pipeline at a glance</h2>
+<div class="pipe">
+  <div class="step"><span class="n">1</span><div class="t">Ideate</div><div class="d">topic-scout finds the angle</div></div>
+  <div class="arrow">→</div>
+  <div class="step"><span class="n">2</span><div class="t">Research</div><div class="d">researcher gathers cited facts</div></div>
+  <div class="arrow">→</div>
+  <div class="step"><span class="n">3</span><div class="t">Draft</div><div class="d">post-drafter writes it</div></div>
+  <div class="arrow">→</div>
+  <div class="step"><span class="n">4</span><div class="t">Edit</div><div class="d">post-editor sharpens it</div></div>
+  <div class="arrow">→</div>
+  <div class="step"><span class="n">5</span><div class="t">Fact-check</div><div class="d">resolve every claim</div></div>
+  <div class="arrow">→</div>
+  <div class="step" style="background:#eafaf0;border-color:#bfe6cf"><span class="n">6</span><div class="t">You approve</div><div class="d">proofread &amp; sign off</div></div>
+  <div class="arrow">→</div>
+  <div class="step"><span class="n">7</span><div class="t">Export</div><div class="d">PDF preview + Medium guide</div></div>
+</div>
+<p>Trigger the whole chain by typing <code>/medium-post</code> or just saying
+<i>"write me a post on &lt;topic&gt;"</i>. The <code>post-producer</code> agent can also run all of
+stages 1–4 inside a single agent if you'd rather have one black box than a step-by-step chain.</p>
+
+<div class="box" style="background:#faf5ff;border-color:#e3d4f5">
+  <h3>＋ Visuals — a parallel track (run any time after the draft exists)</h3>
+  <p>Type <code>/post-visuals</code> and two agents give the post its visual layer:
+  <b>art-director</b> designs the cover (concepts + ready-to-paste image-gen prompts, palette, Medium specs)
+  and <b>chart-maker</b> renders <b>real chart/diagram PNGs</b> into <code>assets/</code>. Every image comes with a
+  caption and alt text. Slot it in before you publish.</p>
+</div>
+
+<h2>The agents &amp; what each does</h2>
+<table>
+  <tr><th>Agent</th><th>Stage</th><th>What it does</th><th>Your input that makes it shine</th></tr>
+  <tr>
+    <td class="agent">topic-scout</td><td>Ideate</td>
+    <td>Generates &amp; ranks post <b>angles</b> (a point of view, not just a topic) with hooks and a "why now". Appends keepers to <code>ideas.md</code>.</td>
+    <td>A theme or a recent market event you care about; who it's for; anything you already believe about it.</td>
+  </tr>
+  <tr>
+    <td class="agent">researcher</td><td>Research</td>
+    <td>Finds real, <b>cited</b> facts, data, and recent events; dates every number; fact-checks claims as confirmed / needs-nuance / unsupported. Escalates deep dives to the global <code>deep-research</code> skill. Saves briefs to <code>research/</code>.</td>
+    <td>What you need to know or verify. It feeds the drafter real material so claims aren't invented.</td>
+  </tr>
+  <tr>
+    <td class="agent">post-drafter</td><td>Draft</td>
+    <td>Turns the chosen angle into a full first draft — titles, hook, subheaded sections, punchy close. Saves to <code>drafts/</code>.</td>
+    <td>The locked angle + any data, anecdotes, or numbers you have. Target length if you have one.</td>
+  </tr>
+  <tr>
+    <td class="agent">post-editor</td><td>Edit</td>
+    <td>Ruthless line edit: stronger hook, cut 10–20% flab, fix pacing, gloss jargon, land the close. Preserves your voice.</td>
+    <td>Usually nothing — it runs on the draft. Tell it if a section is sacred or if you want it shorter/punchier.</td>
+  </tr>
+  <tr>
+    <td class="agent">art-director</td><td>Visuals</td>
+    <td>Designs the look: 2–3 cover concepts with <b>ready-to-paste image-gen prompts</b> (Midjourney / DALL·E / etc.), a palette, Medium specs, placement, captions + alt text. Can't generate AI art directly — it gives you the prompts.</td>
+    <td>The draft or angle, and your image tool of choice. Any brand colors you like.</td>
+  </tr>
+  <tr>
+    <td class="agent">chart-maker</td><td>Visuals</td>
+    <td>Builds <b>real chart/diagram PNGs</b> (equity curves, distributions, schematics) as HTML/SVG rendered via Chrome — no Python needed. Saves to <code>assets/</code> with caption + alt text.</td>
+    <td>The data (CSV/numbers, or the S3 quant data). If it's illustrative, it's labeled as such.</td>
+  </tr>
+  <tr>
+    <td class="agent">post-exporter</td><td>Export</td>
+    <td>After you approve, renders the post to a <b>Medium-styled PDF</b> (so you see how it'll look) and appends a <b>step-by-step guide to paste it into Medium</b> — title/subtitle, cover placement, a markdown→editor formatting map, image captions + alt text, tags. Saves to <code>exports/</code>.</td>
+    <td>Your sign-off. Drop the generated cover into <code>assets/</code> first if you want it embedded.</td>
+  </tr>
+  <tr>
+    <td class="agent">post-producer</td><td>All 1–4</td>
+    <td>Self-contained version of the whole pipeline in one agent. Ideates → drafts → self-edits → fact-checks and returns one publish-ready post.</td>
+    <td>A topic (or nothing). Best when you want minimal back-and-forth and trust it to pick the angle.</td>
+  </tr>
+</table>
+<p class="meta"><span class="pill">chain</span> Use topic-scout → drafter → editor when you want to see each step.
+<span class="pill">one-shot</span> Use post-producer when you just want the finished piece.</p>
+
+<h2>How you help — input that gets the best results</h2>
+<div class="grid2">
+  <div class="box">
+    <h3>At the start (the angle)</h3>
+    <ul>
+      <li><b>Give a stance, not a subject.</b> "Why retail backtests lie" beats "backtesting".</li>
+      <li>Drop any <b>real numbers, trades, or charts</b> you have — it kills the need to invent or flag data.</li>
+      <li>Name the <b>reader</b> if it's narrower than usual (e.g. "for prop-firm traders").</li>
+      <li>Say the <b>length</b> if you care (default 800–1,400 words).</li>
+    </ul>
+  </div>
+  <div class="box warn">
+    <h3>At the end (the proofread)</h3>
+    <ul>
+      <li>Resolve any <code>[VERIFY: …]</code> flags — these are claims it couldn't confirm.</li>
+      <li>Check the <b>hook and the last line</b> first; they carry the post.</li>
+      <li>Confirm nothing reads as financial advice you don't want to make.</li>
+      <li>Say "ship it" / "export it" → you get a <b>Medium-styled PDF + paste guide</b> in <code>exports/</code>, and the file moves to <code>published/</code>.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="box">
+  <h3>One upgrade that changes everything: a voice sample</h3>
+  <p>Drop one or two pieces of <b>your own writing</b> into the folder and tell the agents to match it.
+  They'll mimic <i>your</i> cadence instead of a generic punchy style — the single highest-leverage thing you can do.</p>
+</div>
+
+<h2>The non-negotiable rules (baked into every agent)</h2>
+<ul>
+  <li><b>No fabricated data.</b> Every stat/quote is sourced, flagged <code>[VERIFY: …]</code>, or cut. Never invented.</li>
+  <li><b>Scroll-stopping hook</b> in the first two lines — no throat-clearing.</li>
+  <li><b>Jargon gets a half-sentence inline gloss</b> so the mixed audience never falls off.</li>
+  <li><b>Bold, specific claims</b> backed by a number or mechanism — no hedging into mush.</li>
+  <li><b>Punchy close</b> — the last line lands.</li>
+</ul>
+
+<h2>Quick reference — what to type</h2>
+<table>
+  <tr><th>You want…</th><th>Say this (from inside the folder)</th></tr>
+  <tr><td>The whole post, step by step</td><td><code>/medium-post</code></td></tr>
+  <tr><td>The whole post in one shot</td><td><i>"write me a post on &lt;topic&gt;"</i></td></tr>
+  <tr><td>Just ideas</td><td><i>"give me 6 post ideas about &lt;theme&gt;"</i></td></tr>
+  <tr><td>Research / verify facts</td><td><code>/research-brief</code> or <i>"research &lt;topic&gt; for a post"</i></td></tr>
+  <tr><td>Cover image + charts</td><td><code>/post-visuals</code> or <i>"make visuals for this post"</i></td></tr>
+  <tr><td>Final PDF + Medium paste guide</td><td><code>/publish-pack</code> or <i>"export it"</i> (after you approve)</td></tr>
+  <tr><td>Just a draft to edit yourself</td><td><i>"draft a post on &lt;angle&gt;"</i></td></tr>
+  <tr><td>Sharpen an existing draft</td><td><i>"edit the draft in drafts/"</i></td></tr>
+</table>
+
+<p class="meta"><b>Note:</b> these tools only activate when Claude Code runs from <i>inside</i> the
+<code>Medium&nbsp;Christian</code> folder. Start your writing sessions there.</p>
+
+<div class="footer">Medium Christian workspace · agents in <code>.claude/agents/</code> · workflow in <code>.claude/skills/medium-post/</code></div>
+
+</body>
+</html>
